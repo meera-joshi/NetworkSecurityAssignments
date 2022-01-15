@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Network Security</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1> PA0 - Enciphering Tool</h1>
+
+	<div class="outer">
+	<!-- Text field for Plaintext-->
+	  	<div class="left"> 
+		    <p> Plaintext</p>
+		    <textarea type="text" id="plaintext" name="fname" rows="30" cols="100">	        
+		    </textarea> 
+		    <br>
+		    <br>
+		    <button class="button" onclick="encode()"> Encipher</button>
+	        
+	  </div>    
+	<!-- Text field for Ciphertext-->
+	    <div class="right">
+	        <p> Ciphertext</p>
+	      	<textarea type="text" id="ciphertext" rows="30" cols="100">
+	      	</textarea>
+	      	<br>
+	      	<br>
+	      	<button class="button" onclick="decode()"> Decipher</button>
+	    </div>
+  	</div>
+
+    <script>
+
+    	/* Function to encipher a plaintext. The enciphering alogirhtm followed 
+    	replaces each character of the alphabet with the element at the same index
+    	if the alphabet is written backwards, i.e:
+    	Input: 		ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    	Mapped to:  ZYXWVUTSRQPONMLKJIHGFEDCBA
+
+    	A -> Z
+    	B -> Y
+    	C -> X
+    	...
+    	...
+    	X -> A
+    	Z -> A
+
+    	*/
+    	
+      function encode() {
+        var plaintext = document.getElementById("plaintext").value;
+        var output = "";
+        for(let c of plaintext){
+          let asci = c.charCodeAt();
+          let a = "a".charCodeAt();
+          let z = "z".charCodeAt();
+          let A = "A".charCodeAt();
+          let Z = "Z".charCodeAt();
+          if(asci >= a && asci <= z){
+            output += String.fromCharCode(a+z-asci);
+          }
+          else if(asci >= A && asci <= Z){
+            output += String.fromCharCode(A+Z-asci);
+          }
+          /*If the character is not in the alphabet, we do not change it*/
+          else output += c; 
+
+        }
+        var ciphertext = document.getElementById("ciphertext");
+        ciphertext.value = output ;
+      }
+
+      /* Since the encryption alogirhtm is the same as decryption, the 
+      decode function takes the value of ciphertext and applies the same 
+      algorithm on it to obtain the plaintext*/
+
+      function decode(){
+        var ciphertext = document.getElementById("ciphertext").value;
+        var output = "";
+        for(let c of ciphertext){
+          let asci = c.charCodeAt();
+          let a = "a".charCodeAt();
+          let z = "z".charCodeAt();
+          let A = "A".charCodeAt();
+          let Z = "Z".charCodeAt();
+          if(asci >= a && asci <= z){
+            output += String.fromCharCode(a+z-asci);
+          }
+          else if(asci >= A && asci <= Z){
+            output += String.fromCharCode(A+Z-asci);
+          }
+          else output += c;
+        }
+        var plaintext = document.getElementById("plaintext");
+        plaintext.value = output ;
+
+      }
+     </script>
+  </body>
+</html>
+
+
+
