@@ -24,7 +24,6 @@ and generates the key as a large random number
 in the  modulo group of q, whose gcd with q is 1.
 '''
 def generateKey(q):
-	
 	key = random.randint(10**30, q)
 
 	while gcd(key, q) != 1:
@@ -44,7 +43,6 @@ And returns the encrypted message and g^sender_key
 '''
 
 def encrypt(message, q, g_power_a, generator):
-
 	# Sender selects its private key from F
 	sender_key = generateKey(q)
 
@@ -76,7 +74,6 @@ to obtaine the original message
 '''
 
 def decrypt(encrypted_message, g_power_k, receiver_key, q):
-
 	g_power_ak = moduloExponent(g_power_k, receiver_key, q)
 	decrypted_message = []
 
@@ -88,7 +85,6 @@ def decrypt(encrypted_message, g_power_k, receiver_key, q):
 	return decrypted_message
 
 def main():
-
 	q = random.randint(10**30, 10**50)
 	receiver_key = generateKey(q)
 	generator = random.randint(2,q)
